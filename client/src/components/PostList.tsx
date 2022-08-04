@@ -12,7 +12,7 @@ export default function PostList() {
   return (
     <div className="grid ">
       {posts.length <= 0 ? (
-        <progress className="progress w-56"></progress>
+        <progress className="progress w-60"></progress>
       ) : (
         posts.map(({ title, content, id }) => (
           <div className="card w-96 bg-base-100 shadow-xl" key={id}>
