@@ -23,7 +23,7 @@ public class UserService {
 
   public UserEntity getOne(String id) throws UserNotFoundException {
     Optional<UserEntity> user = userRepository.findById(id);
-    if (user.isEmpty()) {
+    if (!user.isPresent()) {
       throw new UserNotFoundException("User with id \"" + id + "\" not found");
     }
     return user.get();

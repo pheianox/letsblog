@@ -22,7 +22,7 @@ public class PostService {
 
   public PostEntity getOne(String id) throws PostNotFoundException {
     Optional<PostEntity> post = postRepository.findById(id);
-    if (post.isEmpty()) {
+    if (!post.isPresent()) {
       throw new PostNotFoundException("Post with id \"" + id + "\" not found");
     }
     return post.get();
