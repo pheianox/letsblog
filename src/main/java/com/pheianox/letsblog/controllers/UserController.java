@@ -1,6 +1,9 @@
 package com.pheianox.letsblog.controllers;
 
-import java.util.List;
+import com.pheianox.letsblog.entities.UserEntity;
+import com.pheianox.letsblog.exceptions.UserAlreadyExistException;
+import com.pheianox.letsblog.exceptions.UserNotFoundException;
+import com.pheianox.letsblog.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,15 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pheianox.letsblog.entities.UserEntity;
-import com.pheianox.letsblog.exceptions.UserAlreadyExistException;
-import com.pheianox.letsblog.exceptions.UserNotFoundException;
-import com.pheianox.letsblog.services.UserService;
-
 import lombok.AllArgsConstructor;
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -29,14 +27,12 @@ public class UserController {
 
   @GetMapping(path = "/users")
   public List<UserEntity> getAllUsers() {
-    System.out.println("getAll() ");
     return userService.getAll();
   }
 
   @GetMapping(path = "/users/{id}")
-  public ResponseEntity getOneUser(@PathVariable String id) {
+  public ResponseEntity getUser(@PathVariable String id) {
     try {
-      System.out.println("getOneUser() id = " + id);
       return ResponseEntity.ok().body(userService.getOne(id));
     } catch (UserNotFoundException e) {
       return ResponseEntity.badRequest().body(e.getMessage());
