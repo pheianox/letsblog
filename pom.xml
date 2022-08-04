@@ -12,7 +12,11 @@
 	<artifactId>letsblog</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>letsblog</name>
-	<description>Let&apos;s blog!</description>
+	<description>Let us blog!</description>
+	<properties>
+		<javac.src.version>1.8</javac.src.version>
+    <javac.target.version>1.8</javac.target.version>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
