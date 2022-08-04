@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-LetsblogApplication<letsblog>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.pheianox.letsblog.LetsblogApplication",
+      "projectName": "letsblog",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
