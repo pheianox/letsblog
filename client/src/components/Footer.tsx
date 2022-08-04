@@ -5,7 +5,7 @@ export default function Footer() {
         <p>Copyright © 2022 - All right reserved by ACME Industries Ltd</p>
       </div>
       <div>
-        <div class="grid grid-flow-col gap-4">
+        <div className="grid grid-flow-col gap-4">
           <a>
             <svg
               xmlns="http://www.w3.org/2000/svg"
