@@ -6,7 +6,8 @@ import java.util.Optional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.pheianox.letsblog.models.User;
+import com.pheianox.letsblog.entities.UserEntity;
+import com.pheianox.letsblog.exceptions.UserAlreadyExistException;
 import com.pheianox.letsblog.repositories.UserRepository;
 
 import lombok.AllArgsConstructor;
@@ -16,19 +17,18 @@ import lombok.AllArgsConstructor;
 public class UserService {
   private final UserRepository userRepository;
 
-  public List<User> getAllUsers() {
+  public List<UserEntity> getAllUsers() {
     return userRepository.findAll();
   }
 
-  public Optional<User> getById(String id) {
+  public Optional<UserEntity> getById(String id) {
     return userRepository.findById(id);
   }
 
-  public boolean createUser(String email, String name) {
-    if (userRepository.findByEmail(email).isEmpty()) {
-      userRepository.insert(new User(name, email));
-      return true;
+  public UserEntity addUser(UserEntity user) throws UserAlreadyExistException {
+    if (!userRepository.findByEmail(user.getEmail()).isEmpty()) {
+      throw new UserAlreadyExistException("User already exist");
     }
-    return false;
+    return userRepository.save(user);
   }
 }

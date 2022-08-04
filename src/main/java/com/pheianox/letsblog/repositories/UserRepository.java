@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.pheianox.letsblog.models.User;
+import com.pheianox.letsblog.entities.UserEntity;
 
-public interface UserRepository extends MongoRepository<User, String> {
-  List<User> findByEmail(String email);
+public interface UserRepository extends MongoRepository<UserEntity, String> {
+  List<UserEntity> findByEmail(String email);
 }
