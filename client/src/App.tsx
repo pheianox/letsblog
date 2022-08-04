@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col space-between">
       <Navbar />
       <PostList />
       <Footer />
