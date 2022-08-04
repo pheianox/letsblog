@@ -25,11 +25,13 @@ public class UserController {
   @Autowired
   private final UserService userService;
 
+  // Get All Users
   @GetMapping(path = "/users")
   public List<UserEntity> getAllUsers() {
     return userService.getAll();
   }
 
+  // Get One User
   @GetMapping(path = "/users/{id}")
   public ResponseEntity getUser(@PathVariable String id) {
     try {
@@ -37,10 +39,11 @@ public class UserController {
     } catch (UserNotFoundException e) {
       return ResponseEntity.badRequest().body(e.getMessage());
     } catch (Exception e) {
-      return ResponseEntity.badRequest().body("Something went wrong");
+      return ResponseEntity.internalServerError().body("Something went wrong");
     }
   }
 
+  // Create User
   @PostMapping(path = "/users")
   public ResponseEntity createUser(@RequestBody UserEntity user) {
     try {
@@ -49,17 +52,18 @@ public class UserController {
     } catch (UserAlreadyExistException e) {
       return ResponseEntity.badRequest().body(e.getMessage());
     } catch (Exception e) {
-      return ResponseEntity.badRequest().body("Something went wrong");
+      return ResponseEntity.internalServerError().body("Something went wrong");
     }
   }
 
+  // Delete User
   @DeleteMapping(path = "/users/{id}")
   public ResponseEntity deleteUser(@PathVariable String id) {
     try {
       userService.delete(id);
       return ResponseEntity.ok("User is deleted successfully");
     } catch (Exception e) {
-      return ResponseEntity.badRequest().body("Something went wrong");
+      return ResponseEntity.internalServerError().body("Something went wrong");
     }
   }
 }
