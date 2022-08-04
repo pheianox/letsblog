@@ -49,8 +49,6 @@
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
 						</exclude>
-						<source>1.8</source>
-            <target>1.8</target>
 					</excludes>
 				</configuration>
 			</plugin>
