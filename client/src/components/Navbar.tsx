@@ -6,7 +6,6 @@ export default function Navbar() {
           LetsBlog
         </a>
       </div>
-
       <div className="flex-end">
         <div
           className="btn btn"
