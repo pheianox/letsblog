@@ -1,14 +1,22 @@
 import { useEffect, useState } from "react";
 import axios from "../axios";
-import { IPost, SortBy } from "../types";
-import SortDropdown from "./SortDropdown";
+import { Events, subscribe, unsubscribe } from "../events";
+import { IPost } from "../types";
 import ViewsIcon from "./ViewsIcon";
 
 export default function PostList() {
   const [posts, setPosts] = useState<IPost[]>([]);
 
-  useEffect(() => {
+  function update() {
     axios.get("/posts").then((res) => setPosts(res.data));
+  }
+
+  useEffect(() => {
+    update();
+    subscribe(Events.Update, update);
+    return () => {
+      unsubscribe(Events.Update, update);
+    };
   }, []);
 
   return (
@@ -17,7 +25,7 @@ export default function PostList() {
       <div className="flex-none"></div>
       <div className="flex flex-wrap items-center justify-center gap-2 p-2 select-none">
         {posts.length <= 0
-          ? "Loading..."
+          ? "Loading... (this might take some time)"
           : posts.map(({ title, content, id }) => (
               <div
                 className="card card-compact w-96 bg-base-100 shadow-xl"
