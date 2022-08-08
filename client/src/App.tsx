@@ -5,9 +5,11 @@ import Navbar from "./components/Navbar";
 import NewPostModal from "./components/NewPostModal";
 import { useEffect } from "react";
 import ViewPostModal from "./components/ViewPostModal";
+import { disableBackButtonFunction } from "./lib";
 
 function App() {
   useEffect(() => {
+    disableBackButtonFunction()
     window.location.hash = "#";
   }, []);
 
