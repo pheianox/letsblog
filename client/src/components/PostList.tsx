@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
 import axios from "../axios";
-import { Events, subscribe, unsubscribe } from "../events";
+import { Events, publish, subscribe, unsubscribe } from "../events";
 import { IPost } from "../types";
-import ViewsIcon from "./ViewsIcon";
 
 export default function PostList() {
   const [posts, setPosts] = useState<IPost[]>([]);
+  const [isLoading, setIsLoading] = useState(false)
 
   function update() {
-    axios.get("/posts").then((res) => setPosts(res.data));
+    setIsLoading(true)
+    axios
+      .get("/posts")
+      .then((res) => setPosts(res.data))
+      .finally(() => setIsLoading(false));
   }
 
   useEffect(() => {
@@ -25,8 +29,10 @@ export default function PostList() {
       <div className="flex-none"></div>
       <div className="flex flex-wrap items-center justify-center gap-2 p-2 select-none">
         {posts.length <= 0
-          ? "Loading... (this might take some time)"
-          : posts.map(({ title, content, id }) => (
+          ? isLoading ? 'Loading...' : 'No posts yet'
+          : posts.map((post, idx) => {
+            const { title, content, id, author, date } = post
+            return (
               <div
                 className="card card-compact w-96 bg-base-100 shadow-xl"
                 key={id}
@@ -35,16 +41,13 @@ export default function PostList() {
                   <h2 className="card-title">{title}</h2>
                   <p className="text-left">{content.slice(0, 30)}...</p>
                   <div className="card-actions justify-between items-center">
-                    <div>
-                      <div className="flex gap-2 items-center justify-center">
-                        <ViewsIcon /> 15
-                      </div>
-                    </div>
-                    <button className="btn btn-md btn-primary">Read</button>
+                    {author ? author : '(Anonymous)'}
+                    <button className="btn btn-md btn-primary" onClick={() => publish(Events.View, post)}>Read</button>
                   </div>
                 </div>
               </div>
-            ))}
+            )
+          })}
       </div>
     </div>
   );

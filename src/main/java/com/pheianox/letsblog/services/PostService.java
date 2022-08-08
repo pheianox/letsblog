@@ -19,7 +19,7 @@ public class PostService {
   }
 
   public PostEntity create(PostEntity post) {
-    // validation
+    post.setDate(System.currentTimeMillis());
     return postRepository.save(post);
   }
 

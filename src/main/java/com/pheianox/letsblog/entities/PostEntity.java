@@ -12,6 +12,6 @@ public class PostEntity {
   private String id;
   private String title;
   private String content;
-  private Integer date;
+  private Long date;
   private String author;
 }

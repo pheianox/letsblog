@@ -3,7 +3,7 @@ import axios from "../axios";
 import { Events, publish } from "../events";
 
 const MAX_TITLE_LENGTH = 40;
-const MAX_NAME_LENGTH = 40;
+const MAX_NAME_LENGTH = 20;
 
 export default function NewPostModal() {
   const [title, setTitle] = useState("");
@@ -25,8 +25,8 @@ export default function NewPostModal() {
   }
 
   return (
-    <div className="modal" id="newpost">
-      <div className="modal-box text-left overflow-hidden">
+    <div className="modal" id="newpost" onClick={() => window.location.hash = '#'}>
+      <div className="modal-box text-left overflow-hidden" onClick={e => e.stopPropagation()}>
         <div className="prose">
           <h3>New Post</h3>
           <div className="form-control w-full">
@@ -117,7 +117,7 @@ export default function NewPostModal() {
             onClick={() => {
               setIsLoading(true);
               axios
-                .post("/posts", { title, content })
+                .post("/posts", { title, content, author: isAnonoumous ? undefined : author })
                 .then((res) => {
                   console.log(res.data);
                   window.location.hash = "#";

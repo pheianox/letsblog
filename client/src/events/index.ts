@@ -13,6 +13,7 @@ function publish(eventName: number, data: any) {
 
 export enum Events {
   Update,
+  View
 }
 
 export { publish, subscribe, unsubscribe };
