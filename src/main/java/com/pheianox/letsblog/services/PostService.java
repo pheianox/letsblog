@@ -1,12 +1,10 @@
 package com.pheianox.letsblog.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import com.pheianox.letsblog.entities.PostEntity;
-import com.pheianox.letsblog.exceptions.PostNotFoundException;
 import com.pheianox.letsblog.repositories.PostRepository;
 
 import lombok.AllArgsConstructor;
@@ -18,14 +16,6 @@ public class PostService {
 
   public List<PostEntity> getAll() {
     return postRepository.findAll();
-  }
-
-  public PostEntity getOne(String id) throws PostNotFoundException {
-    Optional<PostEntity> post = postRepository.findById(id);
-    if (!post.isPresent()) {
-      throw new PostNotFoundException("Post with id \"" + id + "\" not found");
-    }
-    return post.get();
   }
 
   public PostEntity create(PostEntity post) {

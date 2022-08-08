@@ -6,12 +6,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Data;
 
 @Data
-@Document
+@Document(collection = "posts")
 public class PostEntity {
   @Id
   private String id;
   private String title;
   private String content;
-  private String authorId;
-  private Integer createdAt;
+  private Integer date;
+  private String author;
 }
