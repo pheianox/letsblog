@@ -1,5 +1,6 @@
 package com.pheianox.letsblog.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class PostService {
   }
 
   public PostEntity create(PostEntity post) {
-    post.setDate(System.currentTimeMillis());
+    post.setDate(new Date().getTime());
     return postRepository.save(post);
   }
 
