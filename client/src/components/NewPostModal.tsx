@@ -122,6 +122,9 @@ export default function NewPostModal() {
                   console.log(res.data);
                   window.location.hash = "#";
                   publish(Events.Update, null);
+                  setTitle("")
+                  setContent("")
+                  setAuthor("")
                 })
                 .catch(console.error)
                 .finally(() => {

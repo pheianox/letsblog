@@ -38,7 +38,7 @@ export default function PostList() {
                 key={id}
               >
                 <div className="prose card-body">
-                  <h2 className="card-title">{title}</h2>
+                  <h2 className="text-left card-title pb-3">{title}</h2>
                   <p className="text-left">{content.slice(0, 30)}...</p>
                   <div className="card-actions justify-between items-center">
                     {author ? author : '(Anonymous)'}
