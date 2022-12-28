@@ -1,3 +1,5 @@
-# letsblog
+# Let's Blog
 
-[Live Demo](https://pheianox-letsblog.herokuapp.com/)
+Read & write posts
+
+[Live Demo](https://letsblog-production.up.railway.app/)
